@@ -32,7 +32,7 @@
             background-color: #000;
         }
 
-        /* ব্যাকগ্রাউন্ড স্লাইডার (kg1.webp থেকে kg6.webp) */
+        /* ব্যাকগ্রাউন্ড স্লাইডার (kg1.webp থেকে kg6.webp - অনবরত চলতে থাকবে) */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -65,7 +65,7 @@
             z-index: 2;
         }
 
-        /* মেইন কন্টেন্ট */
+        /* প্রথম স্ক্রিনের মেইন কন্টেন্ট */
         .content-container {
             position: absolute;
             top: 0;
@@ -81,7 +81,7 @@
             padding: 20px;
         }
 
-        /* ভাসমান অ্যাট্রেক্টিভ লেখা */
+        /* ভাসমান গ্লোজিং হেডার টেক্সট */
         .hero-text {
             color: #ffffff;
             font-size: clamp(1.4rem, 5.5vw, 2.1rem);
@@ -129,7 +129,7 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #c64416; }
 
-        /* ফুটার নরমাল সিম্পল টেক্সট */
+        /* ফুটার টেক্সট */
         .footer-copyright {
             position: absolute;
             bottom: 12px;
@@ -142,16 +142,16 @@
             z-index: 3;
         }
 
-        /* ফুল স্ক্রিন পপআপ ও বাফিং ওভারলে */
+        /* বাটনে ক্লিক করার পর পপআপ ও মেসেজ ওভারলে (ছবির উপরেই দেখাবে) */
         .blur-overlay-screen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.70); /* হালকা ডার্ক ওভারলে যাতে পেছনের পিকচার স্লাইড দেখা যায় */
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 99999;
             display: none;
             flex-direction: column;
@@ -168,11 +168,11 @@
             text-transform: uppercase;
             line-height: 1.4;
             margin-bottom: 20px;
-            text-shadow: 0 0 12px #ff0055, 0 0 25px #ff0055;
+            text-shadow: 0 0 12px #ff0055, 0 0 25px #ff0055, 2px 2px 5px #000;
             display: none;
         }
 
-        /* আলাদা এবং বাউন্সিং ফ্রি সাইনআপ টেক্সট */
+        /* আলাদা নড়াচড়া করা Free Signup টেক্সট */
         .highlight-free-signup {
             color: #39ff14;
             text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14;
@@ -201,12 +201,12 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-top: 20px;
-            text-shadow: 0 0 8px rgba(255, 234, 0, 0.6);
+            text-shadow: 0 0 8px rgba(255, 234, 0, 0.6), 1px 1px 3px #000;
             display: none;
             animation: blinkText 1s infinite alternate;
         }
 
-        /* অ্যানিমেশন নিয়মসমূহ */
+        /* অ্যানিমেশন ইফেক্টস */
         @keyframes textGlowPulse {
             0% { text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; transform: scale(1); }
             100% { text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14; transform: scale(1.02); }
@@ -235,7 +235,7 @@
 <body>
 
     <div class="main-wrapper">
-        <!-- ১ সেকেন্ড পরপর ব্যাকগ্রাউন্ড ছবি পরিবর্তনের স্লাইডার -->
+        <!-- ছবির স্লাইডার (ছবিগুলো বিরতিহীনভাবে চলতে থাকবে) -->
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('kg1.webp');"></div>
             <div class="bg-slide" style="background-image: url('kg2.webp');"></div>
@@ -247,7 +247,7 @@
 
         <div class="overlay"></div>
 
-        <!-- মূল কন্টেইনার -->
+        <!-- মূল লেখা ও বাটন -->
         <div class="content-container" id="mainContent">
             <div class="hero-text">
                 1000+ Locanto Girls Listed Here. They Just Need Pure Romance And Hard Fuck
@@ -258,12 +258,12 @@
             </button>
         </div>
 
-        <!-- নিচে নরমাল ফুটার টেক্সট -->
+        <!-- ফুটার টেক্সট -->
         <div class="footer-copyright">
             Copyright © 2006-2026 Locanto™
         </div>
 
-        <!-- পপআপ ও টাইমার স্ক্রিন -->
+        <!-- বাটনে ক্লিক করার পর ভাসমান বার্তা (ব্যাকগ্রাউন্ডের ছবি কিন্তু চলতে থাকবে) -->
         <div id="blurScreen" class="blur-overlay-screen">
             <div class="premium-buffer" id="spinnerDiv"></div>
             
@@ -278,10 +278,10 @@
     </div>
 
     <script>
-        // আপনার অ্যাফিলিয়েট লিংক
+        // অ্যাফিলিয়েট লিংক
         const affiliateLink = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={funbook}&subid2={subid2}&affid=7d1d7a25";
 
-        // ১ সেকেন্ড পরপর ব্যাকগ্রাউন্ডের ছবি লুপ হবে
+        // ১ সেকেন্ড পর পর পিকচার স্লাইডার লুপ
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
         setInterval(() => {
@@ -298,34 +298,34 @@
             const popupMainText = document.getElementById('popupMainText');
             const loadingSubText = document.getElementById('loadingSubText');
 
-            // ৩ সেকেন্ড পর বাটনটি দৃশ্যমান হবে
+            // ল্যান্ডিং পেজে আসার ৩ সেকেন্ড পর বাটন আসবে
             setTimeout(() => {
                 ctaBtn.classList.add('button-active');
             }, 3000);
 
-            // বাটনে ক্লিক পরবর্তী লজিক
+            // বাটনে ক্লিক করার পর লজিক
             ctaBtn.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                // ১. ডিসপ্লের আগের লেখা ও বাটন সাথে সাথে লুকিয়ে ফেলা
+                // ১. প্রথম স্ক্রিনের বাটন ও টেক্সট সরিয়ে ফেলা (ছবিগুলো থাকবে)
                 mainContent.style.display = 'none';
 
-                // ২. ১ সেকেন্ডের ফেক বাফিং স্ক্রিন চালু
+                // ২. ১ সেকেন্ডের জন্য বাফারিং শুরু
                 blurScreen.style.display = 'flex';
                 spinnerDiv.style.display = 'block';
 
-                // ৩. ঠিক ১ সেকেন্ড পর বাফার সরে মেসেজ টেক্সট আসা
+                // ৩. ঠিক ১ সেকেন্ড পর বাফারিং বন্ধ হয়ে গ্লোয়িং মেসেজ চালু হবে
                 setTimeout(() => {
                     spinnerDiv.style.display = 'none';
                     popupMainText.style.display = 'block';
                 }, 1000);
 
-                // ৪. মেসেজ আসার ঠিক ৫ সেকেন্ড পর (বাটন ক্লিকের মোট ৬ সেকেন্ড পর) সাবটেক্সট ভেসে ওঠা
+                // ৪. মেসেজ আসার ৫ সেকেন্ড পর (বাটন ক্লিকের ৬ সেকেন্ড পর) লোডিং সাব-টেক্সট ভেসে উঠবে
                 setTimeout(() => {
                     loadingSubText.style.display = 'block';
                 }, 6000);
 
-                // ৫. মোট ৮ সেকেন্ড পর ফাইনাল রিডাইরেক্ট করা
+                // ৫. মোট ৮ সেকেন্ড পর ফাইনাল অ্যাফিলিয়েট লিংকে রিডাইরেক্ট করবে
                 setTimeout(() => {
                     if (affiliateLink && affiliateLink.trim() !== "") {
                         window.location.href = affiliateLink;
