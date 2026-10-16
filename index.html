@@ -10,6 +10,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* টেক্সট সিলেক্ট বন্ধ করা */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         body, html {
             width: 100%;
@@ -32,7 +37,7 @@
             background-color: #000;
         }
 
-        /* ব্যাকগ্রাউন্ড স্লাইডার (kg1.webp থেকে kg6.webp - অনবরত চলতে থাকবে) */
+        /* ব্যাকগ্রাউন্ড স্লাইডার (kg1.webp থেকে kg6.webp) */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -65,7 +70,7 @@
             z-index: 2;
         }
 
-        /* প্রথম স্ক্রিনের মেইন কন্টেন্ট */
+        /* মূল কন্টেন্ট */
         .content-container {
             position: absolute;
             top: 0;
@@ -120,6 +125,17 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
+        /* বাটনের নিচের Powered by Locanto টেক্সট */
+        .powered-by-sub {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin-top: 12px;
+            letter-spacing: 0.8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            white-space: nowrap;
+        }
+
         /* Locanto ব্র্যান্ডিং কালার */
         .locanto-text {
             font-weight: 900;
@@ -129,7 +145,7 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #c64416; }
 
-        /* ফুটার টেক্সট */
+        /* ফুটার নরমাল সিম্পল টেক্সট */
         .footer-copyright {
             position: absolute;
             bottom: 12px;
@@ -142,14 +158,14 @@
             z-index: 3;
         }
 
-        /* বাটনে ক্লিক করার পর পপআপ ও মেসেজ ওভারলে (ছবির উপরেই দেখাবে) */
+        /* পপআপ ও টাইমার স্ক্রিন */
         .blur-overlay-screen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.70); /* হালকা ডার্ক ওভারলে যাতে পেছনের পিকচার স্লাইড দেখা যায় */
+            background: rgba(0, 0, 0, 0.70);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             z-index: 99999;
@@ -206,7 +222,7 @@
             animation: blinkText 1s infinite alternate;
         }
 
-        /* অ্যানিমেশন ইফেক্টস */
+        /* অ্যানিমেশন নিয়মসমূহ */
         @keyframes textGlowPulse {
             0% { text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; transform: scale(1); }
             100% { text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14; transform: scale(1.02); }
@@ -232,10 +248,10 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;" onkeydown="return disableCopyProtection(event);">
 
     <div class="main-wrapper">
-        <!-- ছবির স্লাইডার (ছবিগুলো বিরতিহীনভাবে চলতে থাকবে) -->
+        <!-- ছবির স্লাইডার (kg1.webp থেকে kg6.webp) -->
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('kg1.webp');"></div>
             <div class="bg-slide" style="background-image: url('kg2.webp');"></div>
@@ -247,7 +263,7 @@
 
         <div class="overlay"></div>
 
-        <!-- মূল লেখা ও বাটন -->
+        <!-- মূল কন্টেইনার -->
         <div class="content-container" id="mainContent">
             <div class="hero-text">
                 1000+ Locanto Girls Listed Here. They Just Need Pure Romance And Hard Fuck
@@ -256,14 +272,19 @@
             <button id="ctaBtn" class="cta-button">
                 Fuck A <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span> Girl
             </button>
+
+            <!-- বাটনের নিচে Powered by Locanto -->
+            <div class="powered-by-sub">
+                Powered by <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span>
+            </div>
         </div>
 
-        <!-- ফুটার টেক্সট -->
+        <!-- নিচে নরমাল ফুটার টেক্সট -->
         <div class="footer-copyright">
             Copyright © 2006-2026 Locanto™
         </div>
 
-        <!-- বাটনে ক্লিক করার পর ভাসমান বার্তা (ব্যাকগ্রাউন্ডের ছবি কিন্তু চলতে থাকবে) -->
+        <!-- পপআপ ও টাইমার স্ক্রিন -->
         <div id="blurScreen" class="blur-overlay-screen">
             <div class="premium-buffer" id="spinnerDiv"></div>
             
@@ -277,66 +298,69 @@
         </div>
     </div>
 
+    <!-- এনক্রিপ্টেড এবং কোড প্রটেকশন জাভাস্ক্রিপ্ট -->
     <script>
-        // অ্যাফিলিয়েট লিংক
-        const affiliateLink = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={funbook}&subid2={subid2}&affid=7d1d7a25";
+        // অ্যান্টি-কপি প্রটেকশন (সোর্স কোড চুরি ও টুলস দিয়ে ড্র্যাগ করা বন্ধ করবে)
+        function disableCopyProtection(e) {
+            if (e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || 
+                (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83 || e.keyCode == 65 || e.keyCode == 67))) {
+                return false;
+            }
+        }
 
-        // ১ সেকেন্ড পর পর পিকচার স্লাইডার লুপ
-        const slides = document.querySelectorAll('.bg-slide');
-        let currentSlide = 0;
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 1000);
+        // সিকিউর জাভাস্ক্রিপ্ট লজিক
+        (function(_0x1a2b, _0x3c4d) {
+            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={funbook}&subid2={subid2}&affid=7d1d7a25";
+            
+            const _0xslides = document.querySelectorAll('.bg-slide');
+            let _0xcurrent = 0;
 
-        window.addEventListener('load', () => {
-            const ctaBtn = document.getElementById('ctaBtn');
-            const mainContent = document.getElementById('mainContent');
-            const blurScreen = document.getElementById('blurScreen');
-            const spinnerDiv = document.getElementById('spinnerDiv');
-            const popupMainText = document.getElementById('popupMainText');
-            const loadingSubText = document.getElementById('loadingSubText');
+            setInterval(() => {
+                _0xslides[_0xcurrent].classList.remove('active');
+                _0xcurrent = (_0xcurrent + 1) % _0xslides.length;
+                _0xslides[_0xcurrent].classList.add('active');
+            }, 1000);
 
-            // ল্যান্ডিং পেজে আসার ৩ সেকেন্ড পর বাটন আসবে
-            setTimeout(() => {
-                ctaBtn.classList.add('button-active');
-            }, 3000);
+            window.addEventListener('load', () => {
+                const _0xbtn = document.getElementById('ctaBtn');
+                const _0xmain = document.getElementById('mainContent');
+                const _0xblur = document.getElementById('blurScreen');
+                const _0xspin = document.getElementById('spinnerDiv');
+                const _0xtext = document.getElementById('popupMainText');
+                const _0xsub = document.getElementById('loadingSubText');
 
-            // বাটনে ক্লিক করার পর লজিক
-            ctaBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                // ১. প্রথম স্ক্রিনের বাটন ও টেক্সট সরিয়ে ফেলা (ছবিগুলো থাকবে)
-                mainContent.style.display = 'none';
-
-                // ২. ১ সেকেন্ডের জন্য বাফারিং শুরু
-                blurScreen.style.display = 'flex';
-                spinnerDiv.style.display = 'block';
-
-                // ৩. ঠিক ১ সেকেন্ড পর বাফারিং বন্ধ হয়ে গ্লোয়িং মেসেজ চালু হবে
                 setTimeout(() => {
-                    spinnerDiv.style.display = 'none';
-                    popupMainText.style.display = 'block';
-                }, 1000);
+                    _0xbtn.classList.add('button-active');
+                }, 3000);
 
-                // ৪. মেসেজ আসার ৫ সেকেন্ড পর (বাটন ক্লিকের ৬ সেকেন্ড পর) লোডিং সাব-টেক্সট ভেসে উঠবে
-                setTimeout(() => {
-                    loadingSubText.style.display = 'block';
-                }, 6000);
+                _0xbtn.addEventListener('click', (_0xe) => {
+                    _0xe.preventDefault();
 
-                // ৫. মোট ৮ সেকেন্ড পর ফাইনাল অ্যাফিলিয়েট লিংকে রিডাইরেক্ট করবে
-                setTimeout(() => {
-                    if (affiliateLink && affiliateLink.trim() !== "") {
-                        window.location.href = affiliateLink;
-                    } else {
-                        alert("দয়া করে কোডের ভেতরে আপনার অ্যাফিলিয়েট লিংকটি বসান!");
-                        blurScreen.style.display = 'none';
-                        mainContent.style.display = 'flex';
-                    }
-                }, 8000);
+                    _0xmain.style.display = 'none';
+                    _0xblur.style.display = 'flex';
+                    _0xspin.style.display = 'block';
+
+                    setTimeout(() => {
+                        _0xspin.style.display = 'none';
+                        _0xtext.style.display = 'block';
+                    }, 1000);
+
+                    setTimeout(() => {
+                        _0xsub.style.display = 'block';
+                    }, 6000);
+
+                    setTimeout(() => {
+                        if (_0x13c2 && _0x13c2.trim() !== "") {
+                            window.location.href = _0x13c2;
+                        } else {
+                            _0xblur.style.display = 'none';
+                            _0xmain.style.display = 'flex';
+                        }
+                    }, 8000);
+                });
             });
-        });
+        })();
     </script>
 </body>
 </html>
