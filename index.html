@@ -37,7 +37,7 @@
             background-color: #000;
         }
 
-        /* ব্যাকগ্রাউন্ড স্লাইডার (kg1.webp থেকে kg6.webp) */
+        /* প্রফেশনাল স্মুথ ফেড স্লাইডার (kg1 থেকে kg6, ২ সেকেন্ড পর পর) */
         .bg-slider {
             position: absolute;
             top: 0;
@@ -53,7 +53,8 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            /* ১ সেকেন্ডের দারুণ স্মুথ ট্রানজিশন যাতে ছবিগুলো প্রিমিয়াম ফিল দেয় */
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .bg-slide.active {
             opacity: 1;
@@ -66,7 +67,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.58);
             z-index: 2;
         }
 
@@ -110,7 +111,7 @@
             animation: textGlowPulse 1.5s infinite alternate ease-in-out;
         }
 
-        /* নতুন নির্দেশনামূলক টেক্সট (Instruction Text) */
+        /* নির্দেশনামূলক সিম্পল টেক্সট */
         .instruction-text {
             color: #00ffff;
             font-size: clamp(0.9rem, 3.8vw, 1.15rem);
@@ -225,7 +226,7 @@
 <body oncontextmenu="return false;" onkeydown="return disableCopyProtection(event);">
 
     <div class="main-wrapper">
-        <!-- ছবির স্লাইডার (kg1.webp থেকে kg6.webp) -->
+        <!-- ব্যাকগ্রাউন্ড স্লাইডার (kg1 থেকে kg6, ২ সেকেন্ড পর পর লুপ হবে) -->
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('kg1.webp');"></div>
             <div class="bg-slide" style="background-image: url('kg2.webp');"></div>
@@ -245,7 +246,7 @@
                     1000+ Locanto Girls Listed Here. They Just Need Pure Romance And Hard Fuck
                 </div>
 
-                <!-- ২. নতুন নির্দেশনামূলক সিম্পল টেক্সট -->
+                <!-- ২. নির্দেশনামূলক সিম্পল টেক্সট -->
                 <div class="instruction-text">
                     Click <span class="highlight-gold">&gt;FUCK A LOCANTO GIRL&lt;</span> button below, complete <span class="highlight-green">FREE SIGNUP</span> on next page &amp; fuck unlimited Locanto girls. It's <span class="highlight-green">100% FREE TO JOIN!</span>
                 </div>
@@ -281,9 +282,9 @@
 
         (function() {
             // আপনার অ্যাফিলিয়েট লিংক
-            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={newxxhot}&subid2={subid2}&affid=7d1d7a25";
+            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={new69x}&subid2={subid2}&affid=7d1d7a25";
             
-            // ব্যাকগ্রাউন্ড ছবি স্লাইডার
+            // ব্যাকগ্রাউন্ড ছবি স্লাইডার (ঠিক ২ সেকেন্ড পর পর লুপ হবে এবং ৬ থেকে আবার ১ এ যাবে)
             const _0xslides = document.querySelectorAll('.bg-slide');
             let _0xcurrent = 0;
 
@@ -291,7 +292,7 @@
                 _0xslides[_0xcurrent].classList.remove('active');
                 _0xcurrent = (_0xcurrent + 1) % _0xslides.length;
                 _0xslides[_0xcurrent].classList.add('active');
-            }, 1000);
+            }, 2000); // ২ সেকেন্ড (2000 মিলিসেকেন্ড) টাইম সেট করা হয়েছে
 
             window.addEventListener('load', () => {
                 const _0xbtn = document.getElementById('ctaBtn');
