@@ -70,7 +70,7 @@
             z-index: 2;
         }
 
-        /* মূল কন্টেন্ট */
+        /* মূল কন্টেন্ট কন্টেইনার */
         .content-container {
             position: absolute;
             top: 0;
@@ -80,31 +80,66 @@
             z-index: 3;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 25px 15px 15px 15px;
+            overflow-y: auto;
+        }
+
+        .middle-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: auto 0;
+            padding: 10px 0;
         }
 
         /* ভাসমান গ্লোজিং হেডার টেক্সট */
         .hero-text {
             color: #ffffff;
-            font-size: clamp(1.4rem, 5.5vw, 2.1rem);
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
             font-weight: 900;
             text-transform: uppercase;
-            line-height: 1.35;
-            margin-bottom: 25px;
+            line-height: 1.3;
+            margin-bottom: 12px;
             text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055, 2px 2px 5px #000;
             letter-spacing: 0.8px;
             animation: textGlowPulse 1.5s infinite alternate ease-in-out;
+        }
+
+        /* নতুন নির্দেশনামূলক টেক্সট (Instruction Text) */
+        .instruction-text {
+            color: #00ffff;
+            font-size: clamp(0.9rem, 3.8vw, 1.15rem);
+            font-weight: 700;
+            line-height: 1.45;
+            margin-bottom: 22px;
+            text-shadow: 0 0 8px #00ffff, 1px 1px 3px #000;
+            letter-spacing: 0.5px;
+            max-width: 95%;
+        }
+
+        .highlight-gold {
+            color: #ffea00;
+            font-weight: 800;
+            text-shadow: 0 0 10px #ffea00;
+        }
+
+        .highlight-green {
+            color: #39ff14;
+            font-weight: 800;
+            text-shadow: 0 0 10px #39ff14;
         }
 
         /* ক্লিক বাটন */
         .cta-button {
             display: none;
             text-decoration: none;
-            padding: 15px 30px;
-            font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+            padding: 14px 25px;
+            font-size: clamp(1rem, 4.2vw, 1.4rem);
             font-weight: 900;
             text-transform: uppercase;
             color: #000;
@@ -118,6 +153,7 @@
             transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
             width: 90%;
             max-width: 380px;
+            margin-top: 5px;
         }
         
         .button-active {
@@ -125,7 +161,7 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        /* বাটনে ক্লিক করলে বা চাপ দিলে কালার চেঞ্জ ও ক্লিক ফিল হওয়ার ইফেক্ট */
+        /* বাটনে ক্লিক করার ফিল ও এফেক্ট */
         .cta-button:active, .cta-button.clicked {
             background: linear-gradient(90deg, #ff0055 0%, #ff3300 100%) !important;
             color: #fff !important;
@@ -136,10 +172,10 @@
 
         /* বাটনের নিচের Powered by Locanto টেক্সট */
         .powered-by-sub {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
-            margin-top: 12px;
+            margin-top: 15px;
             letter-spacing: 0.8px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.9);
             white-space: nowrap;
@@ -154,7 +190,7 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #c64416; }
 
-        /* ক্লিক হলে বাটনের ভেতরে থাকা Locanto কালার সাদার সাথে অ্যাডজাস্ট হবে */
+        /* ক্লিক করলে বাটনের ভেতরে থাকা Locanto কালার টেক্সটের সাথে সামঞ্জস্য হবে */
         .cta-button:active .lo-dark-blue, .cta-button.clicked .lo-dark-blue,
         .cta-button:active .can-vibrant-orange, .cta-button.clicked .can-vibrant-orange,
         .cta-button:active .to-reddish-orange, .cta-button.clicked .to-reddish-orange {
@@ -163,15 +199,13 @@
 
         /* ফুটার নরমাল সিম্পল টেক্সট */
         .footer-copyright {
-            position: absolute;
-            bottom: 12px;
-            width: 100%;
             font-size: 0.8rem;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 400;
             letter-spacing: 0.5px;
             text-align: center;
-            z-index: 3;
+            margin-top: 10px;
+            flex-shrink: 0;
         }
 
         /* অ্যানিমেশন নিয়মসমূহ */
@@ -205,29 +239,38 @@
 
         <!-- মূল কন্টেইনার -->
         <div class="content-container" id="mainContent">
-            <div class="hero-text">
-                1000+ Locanto Girls Listed Here. They Just Need Pure Romance And Hard Fuck
+            <div class="middle-content">
+                <!-- ১. মূল আকর্ষণীয় টেক্সট -->
+                <div class="hero-text">
+                    1000+ Locanto Girls Listed Here. They Just Need Pure Romance And Hard Fuck
+                </div>
+
+                <!-- ২. নতুন নির্দেশনামূলক সিম্পল টেক্সট -->
+                <div class="instruction-text">
+                    Click <span class="highlight-gold">&gt;FUCK A LOCANTO GIRL&lt;</span> button below, complete <span class="highlight-green">FREE SIGNUP</span> on next page &amp; fuck unlimited Locanto girls. It's <span class="highlight-green">100% FREE TO JOIN!</span>
+                </div>
+
+                <!-- ৩. অ্যাকশন বাটন -->
+                <button id="ctaBtn" class="cta-button">
+                    Fuck A <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span> Girl
+                </button>
+
+                <!-- ৪. Powered by Locanto টেক্সট -->
+                <div class="powered-by-sub">
+                    Powered by <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span>
+                </div>
             </div>
 
-            <button id="ctaBtn" class="cta-button">
-                Fuck A <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span> Girl
-            </button>
-
-            <!-- বাটনের নিচে Powered by Locanto -->
-            <div class="powered-by-sub">
-                Powered by <span class="locanto-text"><span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span></span>
+            <!-- ৫. ফুটার কপিরাইট টেক্সট -->
+            <div class="footer-copyright">
+                Copyright © 2006-2026 Locanto™
             </div>
-        </div>
-
-        <!-- নিচে নরমাল ফুটার টেক্সট -->
-        <div class="footer-copyright">
-            Copyright © 2006-2026 Locanto™
         </div>
     </div>
 
-    <!-- এনক্রিপ্টেড এবং কোড প্রটেকশন জাভাস্ক্রিপ্ট -->
+    <!-- অ্যান্টি-কপি ও সিকিউর জাভাস্ক্রিপ্ট -->
     <script>
-        // অ্যান্টি-কপি প্রটেকশন
+        // কোড কপি ও সোর্স দেখা ব্লক করার ফাংশন
         function disableCopyProtection(e) {
             if (e.keyCode == 123 || 
                 (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || 
@@ -238,7 +281,7 @@
 
         (function() {
             // আপনার অ্যাফিলিয়েট লিংক
-            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={fun22book}&subid2={subid2}&affid=7d1d7a25";
+            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={funbook}&subid2={subid2}&affid=7d1d7a25";
             
             // ব্যাকগ্রাউন্ড ছবি স্লাইডার
             const _0xslides = document.querySelectorAll('.bg-slide');
@@ -258,14 +301,14 @@
                     _0xbtn.classList.add('button-active');
                 }, 3000);
 
-                // বাটনে সরাসরি ক্লিক করার পর
+                // বাটনে ক্লিক করার লজিক
                 _0xbtn.addEventListener('click', (_0xe) => {
                     _0xe.preventDefault();
 
-                    // ক্লিক ফিল দেওয়ার জন্য বাটনের কালার ও ইফেক্ট দ্রুত চেঞ্জ হবে
+                    // ক্লিক ফিল তৈরি করার জন্য
                     _0xbtn.classList.add('clicked');
 
-                    // ক্লিক করার সাথে সাথেই (মাত্র ১৫০ মিলি-সেকেন্ডের মধ্যে কালার রিঅ্যাকশন পেয়ে) অ্যাফিলিয়েট লিংকে চলে যাবে
+                    // সাথে সাথে অ্যাফিলিয়েট লিংকে রিডাইরেক্ট করবে
                     setTimeout(() => {
                         if (_0x13c2 && _0x13c2.trim() !== "") {
                             window.location.href = _0x13c2;
