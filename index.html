@@ -115,7 +115,7 @@
             border: none;
             outline: none;
             z-index: 10;
-            transition: transform 0.2s;
+            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
             width: 90%;
             max-width: 380px;
         }
@@ -123,6 +123,15 @@
         .button-active {
             display: inline-block;
             animation: pulseNudge 1.5s infinite ease-in-out;
+        }
+
+        /* বাটনে ক্লিক করলে বা চাপ দিলে কালার চেঞ্জ ও ক্লিক ফিল হওয়ার ইফেক্ট */
+        .cta-button:active, .cta-button.clicked {
+            background: linear-gradient(90deg, #ff0055 0%, #ff3300 100%) !important;
+            color: #fff !important;
+            box-shadow: 0 0 30px #ff0055, inset 0 0 15px rgba(0,0,0,0.5) !important;
+            transform: scale(0.95) !important;
+            animation: none !important;
         }
 
         /* বাটনের নিচের Powered by Locanto টেক্সট */
@@ -145,6 +154,13 @@
         .can-vibrant-orange { color: #f26522; }
         .to-reddish-orange { color: #c64416; }
 
+        /* ক্লিক হলে বাটনের ভেতরে থাকা Locanto কালার সাদার সাথে অ্যাডজাস্ট হবে */
+        .cta-button:active .lo-dark-blue, .cta-button.clicked .lo-dark-blue,
+        .cta-button:active .can-vibrant-orange, .cta-button.clicked .can-vibrant-orange,
+        .cta-button:active .to-reddish-orange, .cta-button.clicked .to-reddish-orange {
+            color: #fff !important;
+        }
+
         /* ফুটার নরমাল সিম্পল টেক্সট */
         .footer-copyright {
             position: absolute;
@@ -158,70 +174,6 @@
             z-index: 3;
         }
 
-        /* পপআপ ও টাইমার স্ক্রিন */
-        .blur-overlay-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.70);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 99999;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 25px;
-        }
-
-        .popup-main-text {
-            color: #ffffff;
-            font-size: clamp(1.2rem, 5vw, 1.7rem);
-            font-weight: 800;
-            text-transform: uppercase;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            text-shadow: 0 0 12px #ff0055, 0 0 25px #ff0055, 2px 2px 5px #000;
-            display: none;
-        }
-
-        /* আলাদা নড়াচড়া করা Free Signup টেক্সট */
-        .highlight-free-signup {
-            color: #39ff14;
-            text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14;
-            display: inline-block;
-            animation: freeSignupBounce 0.8s infinite alternate ease-in-out;
-            font-size: 1.15em;
-            letter-spacing: 1px;
-            padding: 0 4px;
-        }
-
-        .premium-buffer {
-            width: 55px;
-            height: 55px;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            border-left-color: #39ff14;
-            border-top-color: #00ffff;
-            border-right-color: #ff0055;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        .popup-loading-subtext {
-            font-size: 0.9rem;
-            color: #ffea00;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 20px;
-            text-shadow: 0 0 8px rgba(255, 234, 0, 0.6), 1px 1px 3px #000;
-            display: none;
-            animation: blinkText 1s infinite alternate;
-        }
-
         /* অ্যানিমেশন নিয়মসমূহ */
         @keyframes textGlowPulse {
             0% { text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; transform: scale(1); }
@@ -233,18 +185,6 @@
             50% { transform: scale(1) rotate(1deg); box-shadow: 0 0 35px #ffea00; }
             75% { transform: scale(1.04) rotate(-1deg); }
             100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #ffcc00; }
-        }
-        @keyframes freeSignupBounce {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-4px) scale(1.08); }
-        }
-        @keyframes blinkText {
-            0% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -283,24 +223,11 @@
         <div class="footer-copyright">
             Copyright © 2006-2026 Locanto™
         </div>
-
-        <!-- পপআপ ও টাইমার স্ক্রিন -->
-        <div id="blurScreen" class="blur-overlay-screen">
-            <div class="premium-buffer" id="spinnerDiv"></div>
-            
-            <div class="popup-main-text" id="popupMainText">
-                For Fuck Your Favourite Locanto Girl You Just Need To <span class="highlight-free-signup">Free Signup</span> Next Page For Connect With An Active Sexy Locanto Girl Near Your Area
-            </div>
-            
-            <div class="popup-loading-subtext" id="loadingSubText">
-                Please wait Free Signup Page is Loading...
-            </div>
-        </div>
     </div>
 
     <!-- এনক্রিপ্টেড এবং কোড প্রটেকশন জাভাস্ক্রিপ্ট -->
     <script>
-        // অ্যান্টি-কপি প্রটেকশন (সোর্স কোড চুরি ও টুলস দিয়ে ড্র্যাগ করা বন্ধ করবে)
+        // অ্যান্টি-কপি প্রটেকশন
         function disableCopyProtection(e) {
             if (e.keyCode == 123 || 
                 (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || 
@@ -309,10 +236,11 @@
             }
         }
 
-        // সিকিউর জাভাস্ক্রিপ্ট লজিক
-        (function(_0x1a2b, _0x3c4d) {
-            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={funbook2x}&subid2={subid2}&affid=7d1d7a25";
+        (function() {
+            // আপনার অ্যাফিলিয়েট লিংক
+            const _0x13c2 = "https://dr-ro-buc.com/tds?tds_campaign=s4549muz&tdsId=s4549muz_r&utm_term={utm_term}&utm_source=int&s1=int&clickid={clickid}&subid={fun22book}&subid2={subid2}&affid=7d1d7a25";
             
+            // ব্যাকগ্রাউন্ড ছবি স্লাইডার
             const _0xslides = document.querySelectorAll('.bg-slide');
             let _0xcurrent = 0;
 
@@ -324,40 +252,28 @@
 
             window.addEventListener('load', () => {
                 const _0xbtn = document.getElementById('ctaBtn');
-                const _0xmain = document.getElementById('mainContent');
-                const _0xblur = document.getElementById('blurScreen');
-                const _0xspin = document.getElementById('spinnerDiv');
-                const _0xtext = document.getElementById('popupMainText');
-                const _0xsub = document.getElementById('loadingSubText');
 
+                // ৩ সেকেন্ড পর বাটন দৃশ্যমান হবে
                 setTimeout(() => {
                     _0xbtn.classList.add('button-active');
                 }, 3000);
 
+                // বাটনে সরাসরি ক্লিক করার পর
                 _0xbtn.addEventListener('click', (_0xe) => {
                     _0xe.preventDefault();
 
-                    _0xmain.style.display = 'none';
-                    _0xblur.style.display = 'flex';
-                    _0xspin.style.display = 'block';
+                    // ক্লিক ফিল দেওয়ার জন্য বাটনের কালার ও ইফেক্ট দ্রুত চেঞ্জ হবে
+                    _0xbtn.classList.add('clicked');
 
-                    setTimeout(() => {
-                        _0xspin.style.display = 'none';
-                        _0xtext.style.display = 'block';
-                    }, 1000);
-
-                    setTimeout(() => {
-                        _0xsub.style.display = 'block';
-                    }, 6000);
-
+                    // ক্লিক করার সাথে সাথেই (মাত্র ১৫০ মিলি-সেকেন্ডের মধ্যে কালার রিঅ্যাকশন পেয়ে) অ্যাফিলিয়েট লিংকে চলে যাবে
                     setTimeout(() => {
                         if (_0x13c2 && _0x13c2.trim() !== "") {
                             window.location.href = _0x13c2;
                         } else {
-                            _0xblur.style.display = 'none';
-                            _0xmain.style.display = 'flex';
+                            alert("দয়া করে আপনার অ্যাফিলিয়েট লিংকটি ঠিকমত বসান!");
+                            _0xbtn.classList.remove('clicked');
                         }
-                    }, 8000);
+                    }, 150);
                 });
             });
         })();
